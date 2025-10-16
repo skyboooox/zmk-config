@@ -7,6 +7,8 @@
 
 &pro_micro_spi {
     status = "okay";
+    /* Provide CS GPIOs for children; index 0 -> reg = <0> */
+    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
 
     ssd1681: ssd1681@0 {
         compatible = "solomon,ssd1681";
@@ -19,6 +21,7 @@
         /* Control pins via Pro Micro header mapping on nice!nano */
         reset-gpios = <&pro_micro 20 GPIO_ACTIVE_LOW>;/* A2(D20) -> P0.29 */
         dc-gpios = <&pro_micro 19 GPIO_ACTIVE_LOW>;    /* A1(D19) -> P0.02 */
+        /* Per Zephyr binding: BUSY is active high */
         busy-gpios = <&pro_micro 21 GPIO_ACTIVE_HIGH>; /* A3(D21) -> P0.31 */
     };
 };

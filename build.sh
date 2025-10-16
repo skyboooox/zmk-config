@@ -19,7 +19,7 @@ BOARD="nice_nano_v2"
 SHIELD="ssd1681_154"
 OUTPUT_DIR="build/zephyr"
 OUTPUT_FILE="zmk.uf2"
-FINAL_OUTPUT="$/home/user/Documents/zmk-config/zmk_${BOARD}_${SHIELD}.uf2"
+FINAL_OUTPUT="/home/user/Documents/zmk-config/zmk_${BOARD}_${SHIELD}.uf2"
 
 echo -e "${BLUE}================================================${NC}"
 echo -e "${BLUE}  ZMK 固件编译脚本${NC}"
