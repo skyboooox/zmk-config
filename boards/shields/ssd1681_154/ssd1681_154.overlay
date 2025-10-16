@@ -3,32 +3,51 @@
  * Zephyr ssd16xx (ssd16xxfb) driver on SPI for ZMK.
  */
 
+#include <dt-bindings/zmk/matrix_transform.h>
+
 &pro_micro_spi {
     status = "okay";
 
-    ssd1681: ssd16xxfb@0 {
-        compatible = "solomon,ssd16xxfb";
+    ssd1681: ssd1681@0 {
+        compatible = "solomon,ssd1681";
         reg = <0>; /* CS0 */
         spi-max-frequency = <4000000>;
 
-        /* Panel resolution */
-        width = <200>;
         height = <200>;
-
-        /* Parameter bit widths for SSD1681 */
-        pp-width-bits = <8>;
-        pp-height-bits = <8>;
+        width = <200>;
 
         /* Control pins via Pro Micro header mapping on nice!nano */
-        cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;   /* D10 -> P0.09 */
-        dc-gpios = <&pro_micro 19 GPIO_ACTIVE_HIGH>;  /* A1(D19) -> P0.02 */
         reset-gpios = <&pro_micro 20 GPIO_ACTIVE_LOW>;/* A2(D20) -> P0.29 */
-        busy-gpios = <&pro_micro 21 GPIO_ACTIVE_HIGH>;/* A3(D21) -> P0.31 */
+        dc-gpios = <&pro_micro 19 GPIO_ACTIVE_LOW>;    /* A1(D19) -> P0.02 */
+        busy-gpios = <&pro_micro 21 GPIO_ACTIVE_HIGH>; /* A3(D21) -> P0.31 */
     };
 };
 
 / {
     chosen {
         zephyr,display = &ssd1681;
+        zmk,kscan = &kscan0;
+        zmk,matrix-transform = &default_transform;
+    };
+
+    /* 最小的 1x1 键盘矩阵(仅用于满足编译需求) */
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        wakeup-source;
+        
+        diode-direction = "col2row";
+        
+        row-gpios = <&pro_micro 4 GPIO_ACTIVE_HIGH>;
+        col-gpios = <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+    };
+
+    /* 1x1 矩阵变换 */
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <1>;
+        rows = <1>;
+        map = <
+            RC(0,0)
+        >;
     };
 };

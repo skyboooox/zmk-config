@@ -1,0 +1,19 @@
+/*
+ * 最小键盘配置 - 仅用于满足 ZMK 编译需求
+ * 1个按键: Space
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &kp SPACE
+            >;
+        };
+    };
+};

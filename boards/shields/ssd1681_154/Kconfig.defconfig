@@ -6,9 +6,6 @@ if SHIELD_SSD1681_154
 config ZMK_DISPLAY
     default y
 
-config ZMK_DISPLAY_STATUS_SCREEN
-    default y
-
 config LV_Z_BITS_PER_PIXEL
     default 1
 
