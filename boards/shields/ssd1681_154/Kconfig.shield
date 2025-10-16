@@ -1,0 +1,6 @@
+# Copyright (c) 2025 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+# Shield selection flag. Ensure no whitespace in the shield name.
+config SHIELD_SSD1681_154
+    def_bool $(shields_list_contains,ssd1681_154)

@@ -1,0 +1,9 @@
+file_format: "1"
+id: ssd1681_154
+name: SSD1681 1.54in 200x200 E-Paper
+url: https://solomon-systech.com/product/ssd1681/
+requires:
+  - pro_micro
+features:
+  - display
+exposes: []
